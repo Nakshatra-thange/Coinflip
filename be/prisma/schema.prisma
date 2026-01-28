@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model DemoUser {
+  id            String   @id @default(uuid())
+  walletAddress String   @unique
+  balance       Decimal  @default(0)
+  createdAt     DateTime @default(now())
+
+  bets          DemoBet[]
+}
+
+model DemoBet {
+  id            String   @id @default(uuid())
+
+  userId        String
+  user          DemoUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  betAmount     Decimal
+  choice        String        // "heads" | "tails"
+  result        String?       // "win" | "lose"
+  payout        Decimal?      // amount paid if win
+
+  txSignature   String?       // Solana transaction signature
+  status        String        // "pending" | "settled" | "failed"
+
+  createdAt     DateTime      @default(now())
+}
