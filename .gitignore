@@ -1,0 +1,37 @@
+# Root gitignore for monorepo (be/ + frontend/)
+
+# --- Backend (be/) ---
+be/node_modules
+be/dist
+be/out
+be/coverage
+
+# Secrets / env (NEVER commit)
+be/.env
+be/.env.*
+be/secrets/
+be/*.keypair
+be/**/house-wallet.json
+
+# Prisma generated client (optional to commit; ignoring to keep repo clean)
+be/prisma/generated/
+
+# --- Frontend (frontend/) ---
+frontend/node_modules
+frontend/.next/
+frontend/out/
+frontend/build
+frontend/coverage
+frontend/.vercel
+frontend/.env*
+frontend/next-env.d.ts
+
+# --- General ---
+.DS_Store
+.idea
+*.tsbuildinfo
+.eslintcache
+.cache
+logs
+*.log
+
