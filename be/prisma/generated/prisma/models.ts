@@ -10,4 +10,5 @@
  */
 export type * from './models/DemoUser.ts'
 export type * from './models/DemoBet.ts'
+export type * from './models/RealBet.ts'
 export type * from './commonInputTypes.ts'

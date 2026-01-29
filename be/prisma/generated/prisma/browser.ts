@@ -27,3 +27,8 @@ export type DemoUser = Prisma.DemoUserModel
  * 
  */
 export type DemoBet = Prisma.DemoBetModel
+/**
+ * Model RealBet
+ * 
+ */
+export type RealBet = Prisma.RealBetModel

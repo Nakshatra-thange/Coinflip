@@ -22,17 +22,13 @@ demo.post('/initialize', async (c) => {
 })
 
 demo.post('/place-bet', async (c) => {
-  const { walletAddress, betAmount, choice } = await c.req.json()
+  const { walletAddress, betAmount } = await c.req.json()
 
   const allowedBets = [0.1, 0.3, 0.5, 1.0]
   if (!allowedBets.includes(betAmount)) {
     return c.json({ error: 'Invalid bet amount' }, 400)
   }
-
-  if (choice !== 'heads' && choice !== 'tails') {
-    return c.json({ error: 'Invalid choice' }, 400)
-  }
-
+  
   const user = await prisma.demoUser.findUnique({
     where: { walletAddress },
   })
@@ -48,7 +44,7 @@ demo.post('/place-bet', async (c) => {
   const balanceBefore = Number(user.balance)
 
   const result = Math.random() < 0.5 ? 'heads' : 'tails'
-  const won = result === choice
+  const won = result === "heads"
 
   const balanceAfter = won
     ? balanceBefore + betAmount
@@ -63,7 +59,7 @@ demo.post('/place-bet', async (c) => {
       data: {
         userId: user.id,
         betAmount,
-        choice,
+        
         result,
         payout: won ? betAmount : 0,
         status: 'settled',

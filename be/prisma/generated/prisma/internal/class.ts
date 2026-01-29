@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.3.0",
   "engineVersion": "9d6ad21cbbceab97458517b147a6a09ff43aa735",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"./generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel DemoUser {\n  id            String   @id @default(uuid())\n  walletAddress String   @unique\n  balance       Decimal  @default(0)\n  createdAt     DateTime @default(now())\n\n  bets DemoBet[]\n}\n\nmodel DemoBet {\n  id String @id @default(uuid())\n\n  userId String\n  user   DemoUser @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  betAmount Decimal\n  choice    String // \"heads\" | \"tails\"\n  result    String? // \"win\" | \"lose\"\n  payout    Decimal? // amount paid if win\n\n  txSignature String? // Solana transaction signature\n  status      String // \"pending\" | \"settled\" | \"failed\"\n\n  createdAt DateTime @default(now())\n}\n",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"./generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel DemoUser {\n  id            String   @id @default(uuid())\n  walletAddress String   @unique\n  balance       Decimal  @default(0)\n  createdAt     DateTime @default(now())\n\n  bets DemoBet[]\n}\n\nmodel DemoBet {\n  id String @id @default(uuid())\n\n  userId String\n  user   DemoUser @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  betAmount Decimal\n\n  result String? // \"win\" | \"lose\"\n  payout Decimal? // amount paid if win\n\n  txSignature String? // Solana transaction signature\n  status      String // \"pending\" | \"settled\" | \"failed\"\n\n  createdAt DateTime @default(now())\n}\n\nmodel RealBet {\n  id            String   @id @default(cuid())\n  walletAddress String\n  betAmount     Float\n  result        String\n  won           Boolean\n  txSignature   String   @unique\n  balanceAfter  Float?\n  createdAt     DateTime @default(now())\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"DemoUser\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"walletAddress\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"balance\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"bets\",\"kind\":\"object\",\"type\":\"DemoBet\",\"relationName\":\"DemoBetToDemoUser\"}],\"dbName\":null},\"DemoBet\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"DemoUser\",\"relationName\":\"DemoBetToDemoUser\"},{\"name\":\"betAmount\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"choice\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"result\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"payout\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"txSignature\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"DemoUser\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"walletAddress\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"balance\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"bets\",\"kind\":\"object\",\"type\":\"DemoBet\",\"relationName\":\"DemoBetToDemoUser\"}],\"dbName\":null},\"DemoBet\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"DemoUser\",\"relationName\":\"DemoBetToDemoUser\"},{\"name\":\"betAmount\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"result\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"payout\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"txSignature\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"RealBet\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"walletAddress\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"betAmount\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"result\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"won\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"txSignature\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"balanceAfter\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -195,6 +195,16 @@ export interface PrismaClient<
     * ```
     */
   get demoBet(): Prisma.DemoBetDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.realBet`: Exposes CRUD operations for the **RealBet** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RealBets
+    * const realBets = await prisma.realBet.findMany()
+    * ```
+    */
+  get realBet(): Prisma.RealBetDelegate<ExtArgs, { omit: OmitOpts }>;
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {

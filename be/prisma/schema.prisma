@@ -23,7 +23,7 @@ model DemoBet {
   user          DemoUser @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   betAmount     Decimal
-  choice        String        // "heads" | "tails"
+      
   result        String?       // "win" | "lose"
   payout        Decimal?      // amount paid if win
 
@@ -31,4 +31,15 @@ model DemoBet {
   status        String        // "pending" | "settled" | "failed"
 
   createdAt     DateTime      @default(now())
+}
+
+model RealBet {
+  id            String   @id @default(cuid())
+  walletAddress String
+  betAmount     Float
+  result        String
+  won           Boolean
+  txSignature   String   @unique
+  balanceAfter  Float?
+  createdAt     DateTime @default(now())
 }

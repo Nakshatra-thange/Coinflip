@@ -40,7 +40,6 @@ export type DemoBetMinAggregateOutputType = {
   id: string | null
   userId: string | null
   betAmount: runtime.Decimal | null
-  choice: string | null
   result: string | null
   payout: runtime.Decimal | null
   txSignature: string | null
@@ -52,7 +51,6 @@ export type DemoBetMaxAggregateOutputType = {
   id: string | null
   userId: string | null
   betAmount: runtime.Decimal | null
-  choice: string | null
   result: string | null
   payout: runtime.Decimal | null
   txSignature: string | null
@@ -64,7 +62,6 @@ export type DemoBetCountAggregateOutputType = {
   id: number
   userId: number
   betAmount: number
-  choice: number
   result: number
   payout: number
   txSignature: number
@@ -88,7 +85,6 @@ export type DemoBetMinAggregateInputType = {
   id?: true
   userId?: true
   betAmount?: true
-  choice?: true
   result?: true
   payout?: true
   txSignature?: true
@@ -100,7 +96,6 @@ export type DemoBetMaxAggregateInputType = {
   id?: true
   userId?: true
   betAmount?: true
-  choice?: true
   result?: true
   payout?: true
   txSignature?: true
@@ -112,7 +107,6 @@ export type DemoBetCountAggregateInputType = {
   id?: true
   userId?: true
   betAmount?: true
-  choice?: true
   result?: true
   payout?: true
   txSignature?: true
@@ -211,7 +205,6 @@ export type DemoBetGroupByOutputType = {
   id: string
   userId: string
   betAmount: runtime.Decimal
-  choice: string
   result: string | null
   payout: runtime.Decimal | null
   txSignature: string | null
@@ -246,7 +239,6 @@ export type DemoBetWhereInput = {
   id?: Prisma.StringFilter<"DemoBet"> | string
   userId?: Prisma.StringFilter<"DemoBet"> | string
   betAmount?: Prisma.DecimalFilter<"DemoBet"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  choice?: Prisma.StringFilter<"DemoBet"> | string
   result?: Prisma.StringNullableFilter<"DemoBet"> | string | null
   payout?: Prisma.DecimalNullableFilter<"DemoBet"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   txSignature?: Prisma.StringNullableFilter<"DemoBet"> | string | null
@@ -259,7 +251,6 @@ export type DemoBetOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   betAmount?: Prisma.SortOrder
-  choice?: Prisma.SortOrder
   result?: Prisma.SortOrderInput | Prisma.SortOrder
   payout?: Prisma.SortOrderInput | Prisma.SortOrder
   txSignature?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -275,7 +266,6 @@ export type DemoBetWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.DemoBetWhereInput | Prisma.DemoBetWhereInput[]
   userId?: Prisma.StringFilter<"DemoBet"> | string
   betAmount?: Prisma.DecimalFilter<"DemoBet"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  choice?: Prisma.StringFilter<"DemoBet"> | string
   result?: Prisma.StringNullableFilter<"DemoBet"> | string | null
   payout?: Prisma.DecimalNullableFilter<"DemoBet"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   txSignature?: Prisma.StringNullableFilter<"DemoBet"> | string | null
@@ -288,7 +278,6 @@ export type DemoBetOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   betAmount?: Prisma.SortOrder
-  choice?: Prisma.SortOrder
   result?: Prisma.SortOrderInput | Prisma.SortOrder
   payout?: Prisma.SortOrderInput | Prisma.SortOrder
   txSignature?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -308,7 +297,6 @@ export type DemoBetScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"DemoBet"> | string
   userId?: Prisma.StringWithAggregatesFilter<"DemoBet"> | string
   betAmount?: Prisma.DecimalWithAggregatesFilter<"DemoBet"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  choice?: Prisma.StringWithAggregatesFilter<"DemoBet"> | string
   result?: Prisma.StringNullableWithAggregatesFilter<"DemoBet"> | string | null
   payout?: Prisma.DecimalNullableWithAggregatesFilter<"DemoBet"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   txSignature?: Prisma.StringNullableWithAggregatesFilter<"DemoBet"> | string | null
@@ -319,7 +307,6 @@ export type DemoBetScalarWhereWithAggregatesInput = {
 export type DemoBetCreateInput = {
   id?: string
   betAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  choice: string
   result?: string | null
   payout?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   txSignature?: string | null
@@ -332,7 +319,6 @@ export type DemoBetUncheckedCreateInput = {
   id?: string
   userId: string
   betAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  choice: string
   result?: string | null
   payout?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   txSignature?: string | null
@@ -343,7 +329,6 @@ export type DemoBetUncheckedCreateInput = {
 export type DemoBetUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   betAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  choice?: Prisma.StringFieldUpdateOperationsInput | string
   result?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payout?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   txSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -356,7 +341,6 @@ export type DemoBetUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   betAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  choice?: Prisma.StringFieldUpdateOperationsInput | string
   result?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payout?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   txSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -368,7 +352,6 @@ export type DemoBetCreateManyInput = {
   id?: string
   userId: string
   betAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  choice: string
   result?: string | null
   payout?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   txSignature?: string | null
@@ -379,7 +362,6 @@ export type DemoBetCreateManyInput = {
 export type DemoBetUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   betAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  choice?: Prisma.StringFieldUpdateOperationsInput | string
   result?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payout?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   txSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -391,7 +373,6 @@ export type DemoBetUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   betAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  choice?: Prisma.StringFieldUpdateOperationsInput | string
   result?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payout?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   txSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -413,7 +394,6 @@ export type DemoBetCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   betAmount?: Prisma.SortOrder
-  choice?: Prisma.SortOrder
   result?: Prisma.SortOrder
   payout?: Prisma.SortOrder
   txSignature?: Prisma.SortOrder
@@ -430,7 +410,6 @@ export type DemoBetMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   betAmount?: Prisma.SortOrder
-  choice?: Prisma.SortOrder
   result?: Prisma.SortOrder
   payout?: Prisma.SortOrder
   txSignature?: Prisma.SortOrder
@@ -442,7 +421,6 @@ export type DemoBetMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   betAmount?: Prisma.SortOrder
-  choice?: Prisma.SortOrder
   result?: Prisma.SortOrder
   payout?: Prisma.SortOrder
   txSignature?: Prisma.SortOrder
@@ -512,7 +490,6 @@ export type NullableDecimalFieldUpdateOperationsInput = {
 export type DemoBetCreateWithoutUserInput = {
   id?: string
   betAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  choice: string
   result?: string | null
   payout?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   txSignature?: string | null
@@ -523,7 +500,6 @@ export type DemoBetCreateWithoutUserInput = {
 export type DemoBetUncheckedCreateWithoutUserInput = {
   id?: string
   betAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  choice: string
   result?: string | null
   payout?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   txSignature?: string | null
@@ -564,7 +540,6 @@ export type DemoBetScalarWhereInput = {
   id?: Prisma.StringFilter<"DemoBet"> | string
   userId?: Prisma.StringFilter<"DemoBet"> | string
   betAmount?: Prisma.DecimalFilter<"DemoBet"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  choice?: Prisma.StringFilter<"DemoBet"> | string
   result?: Prisma.StringNullableFilter<"DemoBet"> | string | null
   payout?: Prisma.DecimalNullableFilter<"DemoBet"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   txSignature?: Prisma.StringNullableFilter<"DemoBet"> | string | null
@@ -575,7 +550,6 @@ export type DemoBetScalarWhereInput = {
 export type DemoBetCreateManyUserInput = {
   id?: string
   betAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  choice: string
   result?: string | null
   payout?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   txSignature?: string | null
@@ -586,7 +560,6 @@ export type DemoBetCreateManyUserInput = {
 export type DemoBetUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   betAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  choice?: Prisma.StringFieldUpdateOperationsInput | string
   result?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payout?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   txSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -597,7 +570,6 @@ export type DemoBetUpdateWithoutUserInput = {
 export type DemoBetUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   betAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  choice?: Prisma.StringFieldUpdateOperationsInput | string
   result?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payout?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   txSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -608,7 +580,6 @@ export type DemoBetUncheckedUpdateWithoutUserInput = {
 export type DemoBetUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   betAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  choice?: Prisma.StringFieldUpdateOperationsInput | string
   result?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payout?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   txSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -622,7 +593,6 @@ export type DemoBetSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   id?: boolean
   userId?: boolean
   betAmount?: boolean
-  choice?: boolean
   result?: boolean
   payout?: boolean
   txSignature?: boolean
@@ -635,7 +605,6 @@ export type DemoBetSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   id?: boolean
   userId?: boolean
   betAmount?: boolean
-  choice?: boolean
   result?: boolean
   payout?: boolean
   txSignature?: boolean
@@ -648,7 +617,6 @@ export type DemoBetSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   id?: boolean
   userId?: boolean
   betAmount?: boolean
-  choice?: boolean
   result?: boolean
   payout?: boolean
   txSignature?: boolean
@@ -661,7 +629,6 @@ export type DemoBetSelectScalar = {
   id?: boolean
   userId?: boolean
   betAmount?: boolean
-  choice?: boolean
   result?: boolean
   payout?: boolean
   txSignature?: boolean
@@ -669,7 +636,7 @@ export type DemoBetSelectScalar = {
   createdAt?: boolean
 }
 
-export type DemoBetOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "betAmount" | "choice" | "result" | "payout" | "txSignature" | "status" | "createdAt", ExtArgs["result"]["demoBet"]>
+export type DemoBetOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "betAmount" | "result" | "payout" | "txSignature" | "status" | "createdAt", ExtArgs["result"]["demoBet"]>
 export type DemoBetInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.DemoUserDefaultArgs<ExtArgs>
 }
@@ -689,7 +656,6 @@ export type $DemoBetPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     id: string
     userId: string
     betAmount: runtime.Decimal
-    choice: string
     result: string | null
     payout: runtime.Decimal | null
     txSignature: string | null
@@ -1122,7 +1088,6 @@ export interface DemoBetFieldRefs {
   readonly id: Prisma.FieldRef<"DemoBet", 'String'>
   readonly userId: Prisma.FieldRef<"DemoBet", 'String'>
   readonly betAmount: Prisma.FieldRef<"DemoBet", 'Decimal'>
-  readonly choice: Prisma.FieldRef<"DemoBet", 'String'>
   readonly result: Prisma.FieldRef<"DemoBet", 'String'>
   readonly payout: Prisma.FieldRef<"DemoBet", 'Decimal'>
   readonly txSignature: Prisma.FieldRef<"DemoBet", 'String'>

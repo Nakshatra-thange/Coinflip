@@ -385,7 +385,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   DemoUser: 'DemoUser',
-  DemoBet: 'DemoBet'
+  DemoBet: 'DemoBet',
+  RealBet: 'RealBet'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -401,7 +402,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "demoUser" | "demoBet"
+    modelProps: "demoUser" | "demoBet" | "realBet"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -553,6 +554,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    RealBet: {
+      payload: Prisma.$RealBetPayload<ExtArgs>
+      fields: Prisma.RealBetFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RealBetFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RealBetPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RealBetFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RealBetPayload>
+        }
+        findFirst: {
+          args: Prisma.RealBetFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RealBetPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RealBetFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RealBetPayload>
+        }
+        findMany: {
+          args: Prisma.RealBetFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RealBetPayload>[]
+        }
+        create: {
+          args: Prisma.RealBetCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RealBetPayload>
+        }
+        createMany: {
+          args: Prisma.RealBetCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RealBetCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RealBetPayload>[]
+        }
+        delete: {
+          args: Prisma.RealBetDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RealBetPayload>
+        }
+        update: {
+          args: Prisma.RealBetUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RealBetPayload>
+        }
+        deleteMany: {
+          args: Prisma.RealBetDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RealBetUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RealBetUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RealBetPayload>[]
+        }
+        upsert: {
+          args: Prisma.RealBetUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RealBetPayload>
+        }
+        aggregate: {
+          args: Prisma.RealBetAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRealBet>
+        }
+        groupBy: {
+          args: Prisma.RealBetGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RealBetGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RealBetCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RealBetCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -606,7 +681,6 @@ export const DemoBetScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   betAmount: 'betAmount',
-  choice: 'choice',
   result: 'result',
   payout: 'payout',
   txSignature: 'txSignature',
@@ -615,6 +689,20 @@ export const DemoBetScalarFieldEnum = {
 } as const
 
 export type DemoBetScalarFieldEnum = (typeof DemoBetScalarFieldEnum)[keyof typeof DemoBetScalarFieldEnum]
+
+
+export const RealBetScalarFieldEnum = {
+  id: 'id',
+  walletAddress: 'walletAddress',
+  betAmount: 'betAmount',
+  result: 'result',
+  won: 'won',
+  txSignature: 'txSignature',
+  balanceAfter: 'balanceAfter',
+  createdAt: 'createdAt'
+} as const
+
+export type RealBetScalarFieldEnum = (typeof RealBetScalarFieldEnum)[keyof typeof RealBetScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -686,6 +774,27 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Float[]'
+ */
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -799,6 +908,7 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   demoUser?: Prisma.DemoUserOmit
   demoBet?: Prisma.DemoBetOmit
+  realBet?: Prisma.RealBetOmit
 }
 
 /* Types for Logging */

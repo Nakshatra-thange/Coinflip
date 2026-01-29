@@ -52,7 +52,8 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   DemoUser: 'DemoUser',
-  DemoBet: 'DemoBet'
+  DemoBet: 'DemoBet',
+  RealBet: 'RealBet'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -85,7 +86,6 @@ export const DemoBetScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   betAmount: 'betAmount',
-  choice: 'choice',
   result: 'result',
   payout: 'payout',
   txSignature: 'txSignature',
@@ -94,6 +94,20 @@ export const DemoBetScalarFieldEnum = {
 } as const
 
 export type DemoBetScalarFieldEnum = (typeof DemoBetScalarFieldEnum)[keyof typeof DemoBetScalarFieldEnum]
+
+
+export const RealBetScalarFieldEnum = {
+  id: 'id',
+  walletAddress: 'walletAddress',
+  betAmount: 'betAmount',
+  result: 'result',
+  won: 'won',
+  txSignature: 'txSignature',
+  balanceAfter: 'balanceAfter',
+  createdAt: 'createdAt'
+} as const
+
+export type RealBetScalarFieldEnum = (typeof RealBetScalarFieldEnum)[keyof typeof RealBetScalarFieldEnum]
 
 
 export const SortOrder = {
