@@ -1,5 +1,8 @@
 # dependencies (bun install)
 node_modules
+secrets/
+*.keypair
+house-wallet.json
 
 # output
 out
