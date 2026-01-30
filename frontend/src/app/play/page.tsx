@@ -73,7 +73,6 @@ export default function PlayPage() {
 
       const data = await res.json()
       setHistory(data.bets || [])
-
     } catch {
       setErrorMessage("Failed to load history")
     } finally {
@@ -88,7 +87,7 @@ export default function PlayPage() {
     }
   }, [connected, publicKey])
 
-  /* ---------------- CONFIRMATION ---------------- */
+  /* ---------------- CONFIRM ---------------- */
 
   const waitForConfirmation = async (signature: string) => {
     const timeoutMs = 30000
@@ -161,8 +160,6 @@ export default function PlayPage() {
       setErrorMessage(null)
       setTxConfirmed(false)
 
-      /* CREATE BET */
-
       const res = await fetch(
         "http://localhost:3001/api/game/create-bet",
         {
@@ -175,20 +172,14 @@ export default function PlayPage() {
         }
       )
 
-      if (!res.ok) throw new Error("create-bet failed")
+      if (!res.ok) throw new Error()
 
       const data = await res.json()
-
-      /* TX */
 
       const txBuffer = Buffer.from(data.transaction, "base64")
       const tx = Transaction.from(txBuffer)
 
-      /* SIGN */
-
       const signedTx = await window.solana.signTransaction(tx)
-
-      /* SEND */
 
       setTxPending(true)
 
@@ -197,8 +188,6 @@ export default function PlayPage() {
       )
 
       setTxSignature(signature)
-
-      /* CONFIRM */
 
       const confirmed = await waitForConfirmation(signature)
 
@@ -210,8 +199,6 @@ export default function PlayPage() {
 
       setTxConfirmed(true)
       setTxPending(false)
-
-      /* RECORD */
 
       await recordBet(signature, selectedBet, data.result, data.won)
 
@@ -236,23 +223,25 @@ export default function PlayPage() {
   /* ---------------- UI ---------------- */
 
   return (
-    <main className="min-h-screen bg-black text-white p-8 flex flex-col gap-8">
+    <main className="min-h-screen bg-gradient-to-b from-[#001f3f] via-[#002a54] to-[#001f3f] text-white p-8 flex flex-col gap-8">
 
-      <div className="bg-purple-500 text-white font-bold text-center p-3 rounded-xl">
+      {/* Banner */}
+      <div className="bg-gradient-to-r from-[#f0dd58] to-[#ead84e] text-[#001f3f] font-bold text-center p-3 rounded-xl shadow-lg shadow-[#f0dd58]/30">
         DEVNET MODE — TEST SOL ONLY
       </div>
 
+      {/* Wallet */}
       <div className="flex justify-end">
         <WalletButton />
       </div>
 
-      <h1 className="text-4xl font-bold">Real Coin Flip</h1>
+      <h1 className="text-4xl font-serif text-[#f0dd58]">Real Coin Flip</h1>
 
       {/* Balance */}
       <div className="flex items-center gap-6 text-lg">
         <div>
           Wallet Balance:
-          <span className="ml-2 font-mono">
+          <span className="ml-2 font-mono text-[#f0dd58]">
             {walletSol?.toFixed(3) ?? "--"} SOL
           </span>
         </div>
@@ -260,7 +249,7 @@ export default function PlayPage() {
         <button
           onClick={fetchBalance}
           disabled={loadingBalance}
-          className="px-4 py-2 bg-gray-800 rounded-lg"
+          className="px-4 py-2 bg-[#002a54] border border-[#f0dd58]/30 rounded-lg hover:border-[#f0dd58]/60 transition"
         >
           {loadingBalance ? "Refreshing..." : "Refresh"}
         </button>
@@ -268,11 +257,11 @@ export default function PlayPage() {
 
       {/* Errors */}
       {errorMessage && (
-        <div className="bg-red-900 p-4 rounded flex justify-between items-center">
+        <div className="bg-red-500/20 border border-red-500 rounded-xl p-4 flex justify-between">
           <span>{errorMessage}</span>
           <button
             onClick={() => setErrorMessage(null)}
-            className="ml-4 px-3 py-1 bg-red-700 rounded"
+            className="px-3 py-1 bg-red-500/30 rounded"
           >
             Close
           </button>
@@ -285,11 +274,13 @@ export default function PlayPage() {
           <button
             key={bet}
             onClick={() => setSelectedBet(bet)}
-            className={`px-6 py-3 rounded-xl ${
-              selectedBet === bet
-                ? "bg-purple-600"
-                : "bg-gray-900 hover:bg-gray-800"
-            }`}
+            className={`px-6 py-3 rounded-xl font-semibold transition
+              ${
+                selectedBet === bet
+                  ? "bg-gradient-to-r from-[#f0dd58] to-[#ead84e] text-[#001f3f]"
+                  : "bg-[#002a54] border border-[#f0dd58]/20 hover:border-[#f0dd58]/60"
+              }
+            `}
           >
             {bet} SOL
           </button>
@@ -299,24 +290,26 @@ export default function PlayPage() {
       {/* Flip */}
       <button
         onClick={handlePlaceBet}
-        disabled={!selectedBet || !hasEnoughBalance || loadingTx}
-        className={`px-12 py-5 rounded-xl text-xl font-bold ${
-          selectedBet && hasEnoughBalance && !loadingTx
-            ? "bg-white text-black"
-            : "bg-gray-700 text-gray-400"
-        }`}
+        disabled={!selectedBet || loadingTx}
+        className={`px-12 py-5 rounded-xl text-xl font-bold transition
+          ${
+            selectedBet && !loadingTx
+              ? "bg-gradient-to-r from-[#f0dd58] to-[#ead84e] text-[#001f3f] hover:scale-105"
+              : "bg-gray-700 text-gray-400"
+          }
+        `}
       >
-        {loadingTx ? "Processing..." : "Flip Coin"}
+        {loadingTx ? "Preparing Transaction..." : "Flip Coin (Real)"}
       </button>
 
       {/* Pending */}
       {txPending && txSignature && (
-        <div className="bg-yellow-900 p-4 rounded">
+        <div className="bg-yellow-400/20 border border-yellow-400 rounded-xl p-4">
           Pending…
           <a
             href={`https://explorer.solana.com/tx/${txSignature}?cluster=devnet`}
             target="_blank"
-            className="underline ml-3"
+            className="underline ml-3 text-[#f0dd58]"
           >
             View
           </a>
@@ -325,21 +318,21 @@ export default function PlayPage() {
 
       {/* Confirmed */}
       {txConfirmed && txSignature && (
-        <div className="bg-green-900 p-4 rounded">
+        <div className="bg-green-500/20 border border-green-500 rounded-xl p-4">
           Confirmed ✅
         </div>
       )}
 
       {/* HISTORY */}
       <div>
-        <h2 className="text-2xl font-bold mb-3">Recent Bets</h2>
+        <h2 className="text-2xl font-serif text-[#f0dd58] mb-3">Recent Bets</h2>
 
         {loadingHistory && <p>Loading history...</p>}
 
         {history.map(h => (
           <div
             key={h.txSignature}
-            className="border-b border-gray-800 py-3 flex justify-between"
+            className="border-b border-[#f0dd58]/20 py-3 flex justify-between"
           >
             <div>
               {h.betAmount} SOL — {h.result} — {h.won ? "Win" : "Lose"}
@@ -348,7 +341,7 @@ export default function PlayPage() {
             <a
               href={`https://explorer.solana.com/tx/${h.txSignature}?cluster=devnet`}
               target="_blank"
-              className="text-blue-400 underline text-sm"
+              className="text-[#f0dd58] underline text-sm"
             >
               View TX
             </a>
